@@ -1,0 +1,9 @@
+Flask
+requests
+Flask-Cors
+Flask-SQLAlchemy
+Werkzeug
+flask-jwt-extended
+google-cloud-storage
+psycopg2-binary
+

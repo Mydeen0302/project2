@@ -1,0 +1,31 @@
+services:
+  backend:
+    build: ./backend2
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend2:/flask
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=server.py
+
+  frontend:
+    build: ./frontend/frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/frontend:/app
+    depends_on:
+      - backend
+
+  trigger:
+    build: ./Trigger
+    volumes:
+      - ./Trigger:/app
+    depends_on:
+      - backend
+
+networks:
+  default:
+    external:
+      name: my-shared-network
