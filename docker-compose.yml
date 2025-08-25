@@ -14,9 +14,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend/frontend:/app
+      - ./frontend/frontend:/app          
+      - /app/node_modules               
     depends_on:
       - backend
+
 
   trigger:
     build: ./Trigger
