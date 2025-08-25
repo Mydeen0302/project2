@@ -1,37 +1,38 @@
-services:
-  backend:
-    build: ./backend2
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./backend2:/flask
-    environment:
-      - FLASK_ENV=development
-      - FLASK_APP=run.py
-
-  frontend:
-    build: ./frontend/frontend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend/frontend:/app
-      - frontend_node_modules:/app/node_modules               
-    depends_on:
-      - backend
-
-
-  trigger:
-    build: ./Trigger
-    volumes:
-      - ./Trigger:/app
-    depends_on:
-      - backend
-
-networks:
-  default:
-    external:
-      name: my-shared-network
-
-volumes:
-  frontend_node_modules:
-
+  services:
+    backend:
+      build: ./backend2
+      ports:
+        - "5000:5000"
+      volumes:
+        - ./backend2:/flask
+      environment:
+        - FLASK_ENV=development
+        - FLASK_APP=run.py
+  
+    frontend:
+      build: ./frontend/frontend
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./frontend/frontend:/app:cached       
+        - frontend_node_modules:/app/node_modules  
+      depends_on:
+        - backend
+  
+  
+  
+    trigger:
+      build: ./Trigger
+      volumes:
+        - ./Trigger:/app
+      depends_on:
+        - backend
+  
+  networks:
+    default:
+      external:
+        name: my-shared-network
+  
+  volumes:
+    frontend_node_modules:
+  
